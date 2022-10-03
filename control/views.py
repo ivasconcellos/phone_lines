@@ -1,3 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
-# Create your views here.
+from django.contrib.auth import logout
+
+
+def home(request):
+    return render(request, 'home.html')
+
+
+def my_logout(request):
+    logout(request)
+    return redirect('home')
