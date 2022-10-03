@@ -14,6 +14,16 @@ class Phone(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def get_sponsor(self):
+        if self.sponsor:
+            return self.sponsor
+        return "Não registrado!"
+
+    def get_active(self):
+        if self.active == True:
+            return "Sim"
+        return "Não"
+
     class Meta:
         verbose_name = "Phone"
         verbose_name_plural = "Phones"

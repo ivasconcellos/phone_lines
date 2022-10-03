@@ -1,12 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    Lista
-</body>
-</html>
+
+{% extends 'base.html' %}
+
+{% block main %}
+
+    <div class="row">
+    
+
+        <div class="col-12">
+            <h3 class="title">Lista de Ramais</h3>
+
+            <table class="table table-hover">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Ramal</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Setor</th>
+                    <th scope="col">Responsável</th>
+                    <th scope="col">Ativo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for phone in phones %}
+                        <tr>
+                            <th scope="row">{{ phone.id }}</th>
+                            <td>{{ phone.phone_number }}</td>
+                            <td>{{ phone.phone_type }}</td>
+                            <td>{{ phone.department }}</td>
+                            <td>{{ phone.get_sponsor }}</td>
+                            <td>{{ phone.get_active }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+
+            <br>
+
+           
+        </div>
+
+        
+    </div>
+
+
+{% endblock %}
