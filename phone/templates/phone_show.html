@@ -1,31 +1,27 @@
-
 {% extends 'base.html' %}
 
 {% block main %}
 
-    <div class="row">
-    
+<div class="row">
 
-        <div class="col-12">
-            <h3 class="title">Dados do Ramal</h3>
+    <div class="col-12">
+        <h3 class="title">Dados do Ramal</h3>
 
-            <ul>
-                <li>Ramal: {{ phone.phone_number }}</li>
-                <li>Tipo de telefone: {{ phone.phone_number }}</li>
-                <li>Setor: {{ phone.phone_number }}</li>
-                <li>Responsável: {{ phone.get_sponsor }}</li>
-                <li>Ativo: {{ phone.get_active }}</li>
-                <li>Cadastrado em: {{ phone.created_at }}</li>
-                <li>Atualizado em: {{ phone.updated_at }}</li>
-            </ul>
+        <ul>
+            <li>Ramal: {{ phone.phone_number }}</li>
+            <li>Tipo de telefone: {{ phone.phone_number }}</li>
+            <li>Setor: {{ phone.phone_number }}</li>
+            <li>Responsável: {{ phone.get_sponsor }}</li>
+            <li>Ativo: {{ phone.get_active }}</li>
+            <li>Cadastrado em: {{ phone.created_at }}</li>
+            <li>Atualizado em: {{ phone.updated_at }}</li>
+        </ul>
 
-            <br>
-            <a href="{% url 'phone_list' %}" class="btn btn-secondary"> Voltar</a>
-           
-        </div>
+        <br>
+        <a href="{% url 'phone_list' %}" class="btn btn-secondary"> Voltar</a>
 
-        
     </div>
 
+</div>
 
 {% endblock %}
