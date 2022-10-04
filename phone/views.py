@@ -4,7 +4,6 @@ from .models import Phone
 from .forms import PhoneForm
 
 
-@login_required
 def phone_list(request):
     phones = Phone.objects.all()
     return render(request, 'phone_index.html', {'phones': phones})
@@ -37,4 +36,12 @@ def phone_edit(request, id):
         return redirect('phone_list')
 
     return render(request, 'phone_form.html', {'form': form})
+
+
+@login_required
+def phone_delete(request, id):
+    phone = get_object_or_404(Phone, pk=id)
+    phone.delete()
+    return redirect('phone_list')
+
 
