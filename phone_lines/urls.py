@@ -18,6 +18,8 @@ from django.urls import path, include
 from django.contrib.auth.views import LoginView
 from phone import urls as phones_urls
 from control import urls as control_urls
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -25,4 +27,4 @@ urlpatterns = [
     path('', include(control_urls)),
     path('phones/', include(phones_urls)),    
     path('login/', LoginView.as_view(), name='login'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
