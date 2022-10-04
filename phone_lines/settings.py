@@ -45,7 +45,6 @@ INSTALLED_APPS += [
 
 INSTALLED_APPS += [
     'phone',
-    'control',
 ]
 
 MIDDLEWARE = [
