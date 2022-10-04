@@ -24,3 +24,17 @@ def phone_new(request):
         form.save()
         return redirect('phone_list')
     return render(request, 'phone_form.html', {'form': form})
+
+
+@login_required
+def phone_edit(request, id):
+    phone = get_object_or_404(Phone, pk=id)
+
+    form = PhoneForm(request.POST or None, instance=phone)
+
+    if form.is_valid():
+        form.save()
+        return redirect('phone_list')
+
+    return render(request, 'phone_form.html', {'form': form})
+

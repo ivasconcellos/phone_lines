@@ -18,7 +18,7 @@
                     <th scope="col">Setor</th>
                     <th scope="col">Responsável</th>
                     <th scope="col">Ativo</th>
-                    <th>Opções</th>
+                    <th colspan="2">Opções</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -31,6 +31,7 @@
                             <td>{{ phone.get_sponsor }}</td>
                             <td>{{ phone.get_active }}</td>
                             <td> <a href="{% url 'phone_show' phone.id %}">Visualizar</a></td>
+                            <td> <a href="{% url 'phone_edit' phone.id %}">Atualizar</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>
