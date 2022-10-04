@@ -9,6 +9,21 @@
         <div class="col-12">
             <h3 class="title">Lista de Ramais</h3>
 
+            <form class="row g-3">
+                {% csrf_token %}
+                <div class="col-9">
+                    <div class="col-auto">
+                        <input type="text" class="form-control" name="content" placeholder="Informe o Ramal, Setor ou Responsável">
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary mb-3">Pesquisar</button>
+                    </div>
+                </div>                
+            </form>
+
             <table class="table table-hover">
                 <thead class="table-dark">
                   <tr>

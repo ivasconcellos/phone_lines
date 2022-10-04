@@ -5,7 +5,11 @@ from .forms import PhoneForm
 
 
 def phone_list(request):
-    phones = Phone.objects.all()
+    content = request.GET.get('content', None)
+    if content:
+        phones = Phone.objects.filter(phone_number__icontains=content) | Phone.objects.filter(department__icontains=content) | Phone.objects.filter(sponsor__icontains=content)
+    else:
+        phones = Phone.objects.all()
     return render(request, 'phone_index.html', {'phones': phones})
 
 
@@ -43,5 +47,3 @@ def phone_delete(request, id):
     phone = get_object_or_404(Phone, pk=id)
     phone.delete()
     return redirect('phone_list')
-
-
