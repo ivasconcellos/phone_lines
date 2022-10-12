@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class PhoneType(models.TextChoices):
@@ -6,13 +7,14 @@ class PhoneType(models.TextChoices):
     DIGITAL = 'Digital', 'Digital'
 
 class Phone(models.Model):
-    phone_number = models.CharField(max_length=4)
-    phone_type = models.CharField(max_length=9, choices=PhoneType.choices, default=PhoneType.DIGITAL)
-    department = models.CharField(max_length=255)
-    sponsor = models.CharField(max_length=255, blank=True)    
-    active = models.BooleanField(default=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    phone_number = models.CharField(max_length=4, verbose_name="Número do ramal", unique=True, blank=False, null=False)
+    phone_type = models.CharField(max_length=9, choices=PhoneType.choices, default=PhoneType.DIGITAL, verbose_name="Tipo do telefone", blank=False, null=False)
+    department = models.CharField(max_length=255, verbose_name="Setor", blank=False, null=False)
+    sponsor = models.CharField(max_length=255, blank=True, verbose_name="Responsável")    
+    active = models.BooleanField(default=True, verbose_name="Ativo")
+    created_for = models.ForeignKey(User, verbose_name="Cadastrador por", on_delete=models.CASCADE, blank=False, null=False)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Cadastrador em", blank=False, null=False)
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Atualizado em")
 
     def get_sponsor(self):
         if self.sponsor:
