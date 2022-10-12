@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Phone
 from .forms import PhoneForm
@@ -24,7 +25,12 @@ def phone_new(request):
     form = PhoneForm(request.POST or None)
 
     if form.is_valid():
-        form.save()
+        phone = form.save(commit=False)
+        phone.created_for = request.user
+        phone.save()
+
+        messages.success(request, "Ramal cadastrado com sucesso!")
+
         return redirect('phone_list')
     return render(request, 'phone_form.html', {'form': form})
 
@@ -36,7 +42,12 @@ def phone_edit(request, id):
     form = PhoneForm(request.POST or None, instance=phone)
 
     if form.is_valid():
-        form.save()
+        phone = form.save(commit=False)
+        phone.created_for = request.user
+        phone.save()
+
+        messages.success(request, "Ramal atualizado com sucesso!")
+
         return redirect('phone_list')
 
     return render(request, 'phone_form.html', {'form': form})
