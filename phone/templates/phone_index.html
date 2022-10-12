@@ -3,6 +3,14 @@
 
 {% block main %}
 
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    
     <div class="row">
     
 
@@ -24,38 +32,42 @@
                 </div>                
             </form>
 
-            <table class="table table-hover">
-                <thead class="table-dark">
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Ramal</th>
-                    <th scope="col">Tipo</th>
-                    <th scope="col">Setor</th>
-                    <th scope="col">Responsável</th>
-                    <th scope="col">Ativo</th>
-                    {% if user.is_authenticated %}
-                        <th colspan="3">Opções</th>
-                    {% endif %}
-                  </tr>
-                </thead>
-                <tbody>
-                    {% for phone in phones %}
-                        <tr>
-                            <th scope="row">{{ phone.id }}</th>
-                            <td>{{ phone.phone_number }}</td>
-                            <td>{{ phone.phone_type }}</td>
-                            <td>{{ phone.department }}</td>
-                            <td>{{ phone.get_sponsor }}</td>
-                            <td>{{ phone.get_active }}</td>
-                            {% if user.is_authenticated %}
-                                <td> <a href="{% url 'phone_show' phone.id %}">Visualizar</a></td>
-                                <td> <a href="{% url 'phone_edit' phone.id %}">Atualizar</a></td>
-                                <td> <a href="{% url 'phone_delete' phone.id %}">Deletar</a></td>
-                            {% endif %}
-                        </tr>
-                    {% endfor %}
-                </tbody>
-              </table>
+            {% if phones %}
+                <table class="table table-hover">
+                    <thead class="table-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Ramal</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Setor</th>
+                        <th scope="col">Responsável</th>
+                        <th scope="col">Ativo</th>
+                        {% if user.is_authenticated %}
+                            <th colspan="3">Opções</th>
+                        {% endif %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for phone in phones %}
+                            <tr>
+                                <th scope="row">{{ phone.id }}</th>
+                                <td>{{ phone.phone_number }}</td>
+                                <td>{{ phone.phone_type }}</td>
+                                <td>{{ phone.department }}</td>
+                                <td>{{ phone.get_sponsor }}</td>
+                                <td>{{ phone.get_active }}</td>
+                                {% if user.is_authenticated %}
+                                    <td> <a href="{% url 'phone_show' phone.id %}">Visualizar</a></td>
+                                    <td> <a href="{% url 'phone_edit' phone.id %}">Atualizar</a></td>
+                                    <td> <a href="{% url 'phone_delete' phone.id %}">Deletar</a></td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div class="alert alert-warning">Nenhum ramal cadastrado!</div>
+            {% endif %}
 
             <br>
             {% if user.is_authenticated %}
